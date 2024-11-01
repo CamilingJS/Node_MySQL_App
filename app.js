@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
     database: process.env.DB_NAME
   });
 
-let q = 'SELECT CURDATE()';
+let q = 'SELECT * FROM test';
 connection.query(q, function(error, results, fields){
     if(error) throw error;
     console.log(results[0])
@@ -18,7 +18,7 @@ connection.query(q, function(error, results, fields){
 connection.end();
 
   
-//   console.log(connection)
+// console.log(connection)
 
 // console.log(results[0].time);
 // console.log(results[0].date.toString());
