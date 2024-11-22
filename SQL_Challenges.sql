@@ -2,6 +2,24 @@ USE node_mysql_app;
 
 SELECT * FROM USERS; 
 
+-- Business Problem: A manager on the marketing team comes to you to ask about the performance of their recent email campaign. They want to know how many users have clicked the link in the email. You decide to calculate the distribution of the number of email link clicks per user. 
+WITH email_link_clicks AS (
+    SELECT
+        Count(*) as num_link_clicks,
+        UserID
+    FROM FrontendEventLog el
+    WHERE 
+        EventID = 5
+    GROUP BY
+        UserID
+)
+
+SELECT
+    num_link_clicks,
+    Count(*) AS Num_Users
+FROM email_link_clicks
+GROUP BY num_link_clicks;
+
 -- 1. What is the earliest date a user joined
 SELECT DATE_FORMAT(created_at, '%M %D, %Y') FROM users
 ORDER BY created_at DESC
